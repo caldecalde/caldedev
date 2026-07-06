@@ -1,0 +1,68 @@
+---
+import { projects } from "../data/profile";
+---
+
+<section id="projects" class="mx-auto max-w-4xl scroll-mt-24 px-6 py-16">
+  <h2 class="mb-8 flex items-center gap-3 text-2xl font-bold text-white">
+    <span class="font-mono text-lg text-indigo-400">02.</span>
+    Proyectos
+  </h2>
+
+  {
+    projects.length === 0 ? (
+      <div class="rounded-lg border border-dashed border-white/10 px-6 py-12 text-center text-slate-500">
+        <p>Estoy preparando mis proyectos para mostrarlos aquí muy pronto.</p>
+        <p class="mt-1 text-sm">
+          Mientras tanto, puedes revisar mi trabajo en{" "}
+          <a
+            href="https://github.com/caldecalde"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-indigo-400 hover:underline"
+          >
+            GitHub
+          </a>
+          .
+        </p>
+      </div>
+    ) : (
+      <div class="grid gap-6 sm:grid-cols-2">
+        {projects.map((project) => (
+          <article class="rounded-lg border border-white/10 bg-white/[0.02] p-6 transition-colors hover:border-indigo-400/30">
+            <h3 class="text-lg font-semibold text-white">{project.name}</h3>
+            <p class="mt-2 text-sm text-slate-400">{project.description}</p>
+            {project.tags && (
+              <ul class="mt-4 flex flex-wrap gap-2 font-mono text-xs text-slate-500">
+                {project.tags.map((tag) => (
+                  <li>{tag}</li>
+                ))}
+              </ul>
+            )}
+            <div class="mt-4 flex gap-4 text-sm">
+              {project.link && (
+                <a
+                  href={project.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-indigo-400 hover:underline"
+                >
+                  Ver proyecto
+                </a>
+              )}
+              {project.repo && (
+                <a
+                  href={project.repo}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-slate-400 hover:underline"
+                >
+                  Código
+                </a>
+              )}
+            </div>
+          </article>
+        ))}
+      </div>
+    )
+  }
+</section>
