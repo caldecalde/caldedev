@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import { profile } from "../data/profile";
+import Analytics from '@vercel/analytics/astro'
 
 interface Props {
   title?: string;
@@ -22,6 +23,7 @@ const {
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
     <title>{title}</title>
+    <Analytics />
   </head>
   <body class="bg-slate-950 text-slate-200 antialiased selection:bg-indigo-500/30 selection:text-white">
     <slot />
