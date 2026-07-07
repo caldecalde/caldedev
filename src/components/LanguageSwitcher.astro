@@ -1,0 +1,27 @@
+---
+import { languages } from "../i18n/ui";
+import { getLangFromUrl, useTranslatedPath } from "../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const translatePath = useTranslatedPath(lang);
+
+// Asume una sola página ("/"). Si agregas más páginas, calcula el path
+// actual sin el prefijo de idioma en vez de usar "/" fijo.
+---
+
+<div class="flex items-center rounded-full border border-white/10 p-0.5 text-xs font-medium">
+  {
+    Object.keys(languages).map((key) => (
+      <a
+        href={translatePath("/", key as keyof typeof languages)}
+        class={`rounded-full px-2.5 py-1 transition-colors ${
+          lang === key
+            ? "bg-indigo-500/20 text-indigo-300"
+            : "text-slate-500 hover:text-white"
+        }`}
+      >
+        {key.toUpperCase()}
+      </a>
+    ))
+  }
+</div>

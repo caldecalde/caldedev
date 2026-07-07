@@ -1,5 +1,9 @@
 ---
 import { profile } from "../data/profile";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <section class="relative mx-auto flex max-w-4xl flex-col items-start gap-6 px-6 pb-24 pt-20 sm:pt-32">
@@ -8,7 +12,7 @@ import { profile } from "../data/profile";
   >
   </div>
 
-  <p class="font-mono text-sm text-indigo-400">Hola, mi nombre es</p>
+  <p class="font-mono text-sm text-indigo-400">{t("hero.greeting")}</p>
   <h1 class="text-4xl font-bold tracking-tight text-white sm:text-6xl">
     {profile.name}
   </h1>
@@ -16,7 +20,7 @@ import { profile } from "../data/profile";
     {profile.title}
   </h2>
   <p class="max-w-xl text-slate-400">
-    {profile.tagline}
+    {t("hero.tagline")}
   </p>
 
   <div class="mt-4 flex flex-wrap gap-4">
@@ -24,13 +28,13 @@ import { profile } from "../data/profile";
       href="#projects"
       class="rounded-md border border-indigo-400/40 bg-indigo-500/10 px-5 py-2.5 text-sm font-medium text-indigo-300 transition-colors hover:bg-indigo-500/20"
     >
-      Ver proyectos
+      {t("hero.cta.projects")}
     </a>
     <a
       href="#contact"
       class="rounded-md border border-white/10 px-5 py-2.5 text-sm font-medium text-slate-300 transition-colors hover:border-white/20 hover:text-white"
     >
-      Contáctame
+      {t("hero.cta.contact")}
     </a>
   </div>
 </section>

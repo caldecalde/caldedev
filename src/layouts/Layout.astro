@@ -2,20 +2,24 @@
 import "../styles/global.css";
 import { profile } from "../data/profile";
 import Analytics from '@vercel/analytics/astro'
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
 
 interface Props {
   title?: string;
   description?: string;
 }
 
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
 const {
   title = `${profile.name} — ${profile.title}`,
-  description = profile.tagline,
+  description = t("hero.tagline"),
 } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang={lang}>
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />

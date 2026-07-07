@@ -1,26 +1,36 @@
 ---
+import LanguageSwitcher from "./LanguageSwitcher.astro";
+import { getLangFromUrl, useTranslations, useTranslatedPath } from "../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+
 const links = [
-  { href: "#about", label: "Sobre mí" },
-  { href: "#projects", label: "Proyectos" },
-  { href: "#contact", label: "Contacto" },
+  { href: "#about", label: t("nav.about") },
+  { href: "#projects", label: t("nav.projects") },
+  { href: "#contact", label: t("nav.contact") },
 ];
 ---
 
 <header class="sticky top-0 z-50 border-b border-white/5 bg-slate-950/80 backdrop-blur">
   <nav class="mx-auto flex max-w-4xl items-center justify-between px-6 py-4">
-    <a href="#" class="font-semibold tracking-tight text-white">
+    <a href={translatePath("/")} class="font-semibold tracking-tight text-white">
       Andrés<span class="text-indigo-400">.</span>dev
     </a>
-    <ul class="flex items-center gap-6 text-sm text-slate-400">
-      {
-        links.map((link) => (
-          <li>
-            <a href={link.href} class="transition-colors hover:text-white">
-              {link.label}
-            </a>
-          </li>
-        ))
-      }
-    </ul>
+    <div class="flex items-center gap-6">
+      <ul class="flex items-center gap-6 text-sm text-slate-400">
+        {
+          links.map((link) => (
+            <li>
+              <a href={link.href} class="transition-colors hover:text-white">
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <LanguageSwitcher />
+    </div>
   </nav>
 </header>
